@@ -3,7 +3,7 @@ import sklearn.model_selection as skselection
 import numpy as np
 import pdb
 from itertools import product
-from enum import Enum, auto
+from enum import Enum
 
 
 class _Identifier:
@@ -68,7 +68,7 @@ def _mlp_generator():
 _MIN_HL_SIZE = 100
 
 
-class GRIDIndexes:
+class GRIDIndexes(Enum):
     HLSIZE= 0
     ACTIVATION = 1
     SOLVER = 2
