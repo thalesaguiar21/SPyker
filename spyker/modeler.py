@@ -1,4 +1,6 @@
 import sklearn.mixture as mixtures
+from itertools import product
+import pdb
 
 
 def create_models(X, Y):
@@ -13,6 +15,20 @@ def create_models(X, Y):
 
 def _map_adaptation():
     pass
+
+
+def _modelers_generator(X, y):
+    qtd_components = [x for x in range(1, 10, 1)]
+    covariances = ['full', 'tied', 'diag', 'spherical']
+    tol = [0.01, 0.001, 0.0001]
+    grid = product(qtd_components, covariances, tol)
+    nmodel = 1
+    for row in grid:
+        print('Running modelers {}'.format(nmodel), end='\r')
+        nmodel += 1
+        gmm = mixtures.GaussianMixture(n_components=row[0],
+                                       covariance_type=row[1], tol=row[2])
+        yield gmm
 
 
 class Modeler:
