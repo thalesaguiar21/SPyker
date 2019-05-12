@@ -67,7 +67,7 @@ _MIN_HL_SIZE = 100
 
 
 class GRIDIndexes(Enum):
-    HLSIZE= 0
+    HLSIZE = 0
     ACTIVATION = 1
     SOLVER = 2
     ALPHA = 3
