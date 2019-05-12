@@ -2,13 +2,17 @@ import sklearn.neural_network as skneural
 import sklearn.model_selection as skselection
 
 
-class Identifier:
+class _Identifier:
 
     def __init__(self, detector):
         self.detector = detector
 
     def identify(self, Xi):
         return self.detector.predict(Xi)
+
+
+def create_identifier():
+    pass
 
 
 def train(X, y):
@@ -25,7 +29,7 @@ def train(X, y):
         accuracy = hits/X.shape[0] * 100
         if best_acc <= accuracy:
             best_mlp = mlp
-    return Identifier(best_mlp)
+    return _Identifier(best_mlp)
 
 
 def _mlp_generator():
