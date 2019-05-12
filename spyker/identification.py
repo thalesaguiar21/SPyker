@@ -1,7 +1,5 @@
 import sklearn.neural_network as skneural
 import sklearn.model_selection as skselection
-import numpy as np
-import pdb
 from itertools import product
 from enum import Enum
 
