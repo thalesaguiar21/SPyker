@@ -5,12 +5,11 @@ import pdb
 
 def create_models(X, Y):
     """ X and Y are, respectively, the input and output vectors """
-    model = mixtures.GaussianMixture(
-        n_components=1, covariance_type='full', tol=0.001, reg_covar=1e-06,
-        max_iter=100, n_init=1, init_params='kmeans', weights_init=None,
-        means_init=None, precisions_init=None, random_state=None,
-        warm_start=False, verbose=0, verbose_interval=10)
-    model.fit(X)
+    nmodel = 1
+    for model in _modelers_generator(X, Y):
+        print('Running modelers {}'.format(nmodel), end='\r')
+        nmodel += 1
+    return Modeler(best_model)
 
 
 def _map_adaptation():
@@ -22,12 +21,10 @@ def _modelers_generator(X, y):
     covariances = ['full', 'tied', 'diag', 'spherical']
     tol = [0.01, 0.001, 0.0001]
     grid = product(qtd_components, covariances, tol)
-    nmodel = 1
     for row in grid:
-        print('Running modelers {}'.format(nmodel), end='\r')
-        nmodel += 1
         gmm = mixtures.GaussianMixture(n_components=row[0],
                                        covariance_type=row[1], tol=row[2])
+        gmm.fit(X)
         yield gmm
 
 
